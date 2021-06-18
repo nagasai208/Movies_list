@@ -1,4 +1,4 @@
-import SearchItem from "../searchItem";
+import SearchItem from "../SearchItem";
 import MoviesList from "../MoviesList";
 import { MoviesDashBoardMainDiv } from "./styledComponents";
 const MoviesDashboard = () => {

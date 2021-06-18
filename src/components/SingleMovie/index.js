@@ -12,13 +12,15 @@ const SingleMovie = () => {
   const getMovie = async () => {
     setLoading(true);
     try {
+      console.log(id, 'id')
       const response = await fetch(
         `https://api.themoviedb.org/3/movie/${parseInt(
-          id.slice(1),
+          id.slice(0),
           10
         )}?api_key=2796089069f7e1ab4a272ee08e4d6561`
       );
       const data = await response.json();
+      console.log(data, 'dhfg')
       if (data) {
         const {
           budget,
@@ -35,7 +37,7 @@ const SingleMovie = () => {
           spoken_languages: english,
           status,
           vote_average: voteAverage,
-          vote_count:voteCount
+          vote_count: voteCount
         } = data;
 
         const newMovie = {
@@ -84,16 +86,17 @@ const SingleMovie = () => {
         <MovieTitle>{singleMovie.original_title}</MovieTitle>
         <SingleMovieDiv>
           <Image src={`${imageUrl}${singleMovie.poster_path}`} alt={singleMovie.id} />
-          <DataDiv> 
+          <DataDiv>
             <p>Description:{singleMovie.desc}</p>
             <p>Status:{singleMovie.status}</p>
             <p>Rating:{singleMovie.voteAverage}</p>
             <p>Genres:
               {
-              singleMovie.genres.length !== 0 &&
-              singleMovie.genres.map((eachGenrs) => {
-                return <label>{eachGenrs.name},</label>;
-              })}
+                singleMovie.genres !== null &&
+                singleMovie.genres.length !== 0 &&
+                singleMovie.genres.map((eachGenrs) => {
+                  return <label>{eachGenrs.name},</label>;
+                })}
             </p>
             <p>Budget:{singleMovie.budget}</p>
             <p>Popularity:{singleMovie.popularity}</p>
